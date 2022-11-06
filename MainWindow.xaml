@@ -1,0 +1,34 @@
+﻿<Window x:Class="WeatherDesktop.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WeatherDesktop"
+        xmlns:ViewModel="clr-namespace:WeatherDesktop.ViewModels"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Window.DataContext>
+        <ViewModel:MainVM></ViewModel:MainVM>
+    </Window.DataContext>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition Width="3*"></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition></RowDefinition>
+            <RowDefinition Height="5*"></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Column="1" Grid.Row="1">
+            <Label FontSize="36" Content="{Binding City, UpdateSourceTrigger=PropertyChanged}"></Label>
+            <StackPanel Grid.Column="1" Grid.Row="1" Orientation="Horizontal">
+                <Label FontSize="24">Температура:</Label>
+                <Label FontSize="24" Content="{Binding Temperature, UpdateSourceTrigger=PropertyChanged}"></Label>
+                <Label FontSize="24">°C</Label>
+            </StackPanel>
+        </StackPanel>
+        <Button Command="{Binding ButtonClick, UpdateSourceTrigger=PropertyChanged}" Grid.Column="2" Grid.Row="2">Обновить</Button>
+    </Grid>
+</Window>
