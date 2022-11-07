@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
+using WeatherDesktop.ViewModels;
 
 namespace WeatherDesktop.ViewModels
 {
@@ -11,15 +8,17 @@ namespace WeatherDesktop.ViewModels
     {
         public event EventHandler CanExecuteChanged;
         Action _action;
+        Func<bool> _func;
 
-        public ButtonCommand(Action action)
+        public ButtonCommand(Action action, Func<bool> func = null)
         {
             _action = action;
+            _func = func;
         }
 
         public bool CanExecute(object parameter)
         {
-            return true;
+            return _func == null || _func();
         }
 
         public void Execute(object parameter)
@@ -28,3 +27,7 @@ namespace WeatherDesktop.ViewModels
         }
     }
 }
+
+
+
+

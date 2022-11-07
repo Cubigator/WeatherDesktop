@@ -21,6 +21,7 @@
             <RowDefinition Height="5*"></RowDefinition>
             <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
+        <TextBox TextChanged="enterCity_TextChanged" x:Name="enterCity" FontSize="16" Grid.Column="1"></TextBox>
         <StackPanel Grid.Column="1" Grid.Row="1">
             <Label FontSize="36" Content="{Binding City, UpdateSourceTrigger=PropertyChanged}"></Label>
             <StackPanel Grid.Column="1" Grid.Row="1" Orientation="Horizontal">

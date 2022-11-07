@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel;
 
 namespace WeatherDesktop.ViewModels
 {
@@ -42,11 +37,22 @@ namespace WeatherDesktop.ViewModels
             {
                 return new ButtonCommand(() =>
                 {
-                    weatherHandler = new WeatherHandler();
-                    _weather = weatherHandler.GetActualWeather();
-                    Temperature = _weather.Main.Temp.ToString();
-                    City = _weather.Name;
-                    Invoke("ButtonClick");
+                    try
+                    {
+                        weatherHandler = new WeatherHandler();
+                        _weather = weatherHandler.GetActualWeather(MainWindow.enteredCity);
+                        Temperature = _weather.Main.Temp.ToString();
+                        City = _weather.Name;
+                        Invoke("ButtonClick");
+                    }
+                    catch { City = "Неверный ввод"; }
+                    //try catch от неправильного ввода города
+                }, () =>
+                {
+                    return MainWindow.enteredCity != null;
+                    //В кнопке Command срабатывает только 1 раз (при инициализации?),
+                    //и затем, когда текст изменяется, не отрабатывает (если изначально
+                    //текст пустой, кнопка всегда будет неактивной
                 });
             }
         }
