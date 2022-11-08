@@ -10,14 +10,14 @@ namespace WeatherDesktop
             string json = JsonConvert.SerializeObject(weather);
             string path = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName;
 
-            using (FileStream file = new FileStream(path + "\\SavedData\\savings.json", FileMode.Open))
-            {
-                using (StreamWriter writer = new StreamWriter(file))
-                {
-                    writer.Write(json);
-                    writer.Flush();
-                }
-            }
+            FileStream file = new FileStream(path + "\\SavedData\\savings.json", FileMode.Truncate);
+            StreamWriter writer = new StreamWriter(file);
+
+            writer.Write(json);
+            writer.Flush();
+
+            writer.Close();
+            file.Close();
         }
         public static Weather GetSettings()
         {
@@ -29,6 +29,8 @@ namespace WeatherDesktop
             string json = reader.ReadToEnd();
 
             Weather weather = JsonConvert.DeserializeObject(json, typeof(Weather)) as Weather;
+            file.Close();
+            reader.Close();
             return weather;
         }
     }
