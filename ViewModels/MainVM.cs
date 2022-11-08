@@ -11,6 +11,12 @@ namespace WeatherDesktop.ViewModels
 
         string _temperature;
         string _city;
+        public MainVM()
+        {
+            _weather = SavingsHandler.GetSettings();
+            Temperature = _weather.Main.Temp.ToString();
+            City = _weather.Name;
+        }
 
         public string City
         {
@@ -44,8 +50,10 @@ namespace WeatherDesktop.ViewModels
                         Temperature = _weather.Main.Temp.ToString();
                         City = _weather.Name;
                         Invoke("ButtonClick");
+
+                        SavingsHandler.UpdateSettings(_weather);
                     }
-                    catch { City = "Неверный ввод"; }
+                    catch { City = "Такого города у нас нет("; }
                     //try catch от неправильного ввода города
                 }, () =>
                 {
