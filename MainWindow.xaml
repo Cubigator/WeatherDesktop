@@ -6,11 +6,11 @@
         xmlns:local="clr-namespace:WeatherDesktop"
         xmlns:ViewModel="clr-namespace:WeatherDesktop.ViewModels"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="600" Width="800">
     <Window.DataContext>
         <ViewModel:MainVM></ViewModel:MainVM>
     </Window.DataContext>
-    <Grid>
+    <Grid Background="AliceBlue">
         <Grid.ColumnDefinitions>
             <ColumnDefinition></ColumnDefinition>
             <ColumnDefinition Width="3*"></ColumnDefinition>
@@ -21,15 +21,50 @@
             <RowDefinition Height="5*"></RowDefinition>
             <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
+
         <TextBox TextChanged="enterCity_TextChanged" x:Name="enterCity" FontSize="16" Grid.Column="1"></TextBox>
         <StackPanel Grid.Column="1" Grid.Row="1">
+            
             <Label FontSize="36" Content="{Binding City, UpdateSourceTrigger=PropertyChanged}"></Label>
+            
             <StackPanel Grid.Column="1" Grid.Row="1" Orientation="Horizontal">
                 <Label FontSize="24">Температура:</Label>
                 <Label FontSize="24" Content="{Binding Temperature, UpdateSourceTrigger=PropertyChanged}"></Label>
                 <Label FontSize="24">°C</Label>
             </StackPanel>
+            
+            <StackPanel Grid.Column="1" Grid.Row="1" Orientation="Horizontal">
+                <Label FontSize="18">Ощущается как: </Label>
+                <Label FontSize="18" Content="{Binding FeelsLike, UpdateSourceTrigger=PropertyChanged}"></Label>
+                <Label FontSize="18">°C</Label>
+            </StackPanel>
+
+            <StackPanel Grid.Column="1" Grid.Row="1" Orientation="Horizontal">
+                <Label FontSize="18">Давление: </Label>
+                <Label FontSize="18" Content="{Binding Pressure, UpdateSourceTrigger=PropertyChanged}"></Label>
+                <Label FontSize="18">мм рт. ст.</Label>
+            </StackPanel>
+
+            <StackPanel Grid.Column="1" Grid.Row="1" Orientation="Horizontal">
+                <Label FontSize="18">Влажность: </Label>
+                <Label FontSize="18" Content="{Binding Humidity, UpdateSourceTrigger=PropertyChanged}"></Label>
+                <Label FontSize="18">%</Label>
+            </StackPanel>
+
+            <StackPanel Grid.Column="1" Grid.Row="1" Orientation="Horizontal">
+                <Label FontSize="18">Скорость ветра:</Label>
+                <Label FontSize="18" Content="{Binding SpeedOfWind, UpdateSourceTrigger=PropertyChanged}"></Label>
+                <Label FontSize="18">м/с</Label>
+            </StackPanel>
+
+            <Image Source="{Binding ImagePath, UpdateSourceTrigger=PropertyChanged}" Margin="0,0,50,0" HorizontalAlignment="Right" Height="100" Width="100"></Image>
         </StackPanel>
-        <Button Command="{Binding ButtonClick, UpdateSourceTrigger=PropertyChanged}" Grid.Column="2" Grid.Row="2">Обновить</Button>
+        <Button Background="White" Command="{Binding ButtonClick, UpdateSourceTrigger=PropertyChanged}" Grid.Column="2" Grid.Row="2">
+            <Grid>
+                <Polygon Points="100,25 125,0 200,25 125,50" Fill="LightSteelBlue"></Polygon>
+                <Polygon Points="100,25 75,0 0,25 75,50" Fill="CornflowerBlue"></Polygon>
+                <Label FontWeight="Bold" FontSize="24" HorizontalAlignment="Center" VerticalAlignment="Center">Обновить</Label>
+            </Grid>
+        </Button>
     </Grid>
 </Window>

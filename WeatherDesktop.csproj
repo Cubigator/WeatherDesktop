@@ -58,12 +58,15 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Breeze.cs" />
     <Compile Include="Coordinates.cs" />
+    <Compile Include="Precipitation.cs" />
     <Compile Include="SavingsHandler.cs" />
     <Compile Include="Temperature.cs" />
     <Compile Include="ViewModels\ButtonCommand.cs" />
+    <Compile Include="ViewModels\GetImagePath.cs" />
     <Compile Include="ViewModels\MainVM.cs" />
-    <Compile Include="Weather.cs" />
+    <Compile Include="WeatherInfo.cs" />
     <Compile Include="WeatherHandler.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>

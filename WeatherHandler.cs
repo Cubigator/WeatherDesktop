@@ -1,5 +1,4 @@
 ﻿using Newtonsoft.Json;
-using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Net;
@@ -33,7 +32,7 @@ namespace WeatherDesktop
                 _lat = coordinates[0].Lat.ToString();
                 _lon = coordinates[0].Lon.ToString();
         }
-        public Weather GetActualWeather(string cityName)
+        public WeatherInfo GetActualWeather(string cityName)
         {
             UpdateCoords(cityName);
 
@@ -47,7 +46,7 @@ namespace WeatherDesktop
             {
                 json = reader.ReadToEnd();
             }
-            Weather result = JsonConvert.DeserializeObject(json, typeof(Weather)) as Weather;
+            WeatherInfo result = JsonConvert.DeserializeObject(json, typeof(WeatherInfo)) as WeatherInfo;
             return result;
         }
     }

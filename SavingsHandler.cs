@@ -5,7 +5,7 @@ namespace WeatherDesktop
 {
     static internal class SavingsHandler
     {
-        public static void UpdateSettings(Weather weather)
+        public static void UpdateSettings(WeatherInfo weather)
         {
             string json = JsonConvert.SerializeObject(weather);
             string path = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName;
@@ -19,7 +19,7 @@ namespace WeatherDesktop
             writer.Close();
             file.Close();
         }
-        public static Weather GetSettings()
+        public static WeatherInfo GetSettings()
         {
             string path = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName;
 
@@ -28,7 +28,7 @@ namespace WeatherDesktop
 
             string json = reader.ReadToEnd();
 
-            Weather weather = JsonConvert.DeserializeObject(json, typeof(Weather)) as Weather;
+            WeatherInfo weather = JsonConvert.DeserializeObject(json, typeof(WeatherInfo)) as WeatherInfo;
             file.Close();
             reader.Close();
             return weather;

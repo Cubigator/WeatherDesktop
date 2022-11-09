@@ -7,17 +7,70 @@ namespace WeatherDesktop.ViewModels
         public event PropertyChangedEventHandler PropertyChanged;
 
         WeatherHandler weatherHandler;
-        Weather _weather;
+        WeatherInfo _weather;
 
         string _temperature;
+        string _feelsLike;
         string _city;
+        string _pressure; //давление
+        string _humidity; //влажность
+        string _imagePath;
+        string _speedOfWind;
         public MainVM()
         {
             _weather = SavingsHandler.GetSettings();
             Temperature = _weather.Main.Temp.ToString();
+            FeelsLike = _weather.Main.Feels_Like.ToString();
+            Pressure = _weather.Main.Pressure.ToString();
+            Humidity = _weather.Main.Humidity.ToString();
+            SpeedOfWind = _weather.Wind.Speed.ToString();
             City = _weather.Name;
         }
-
+        public string SpeedOfWind
+        {
+            get { return _speedOfWind; }
+            set
+            {
+                _speedOfWind = value;
+                Invoke("SpeedOfWind");
+            }
+        }
+        public string ImagePath
+        {
+            get { return _imagePath; }
+            set
+            {
+                _imagePath = value;
+                Invoke("ImagePath");
+            }
+        }
+        public string Pressure
+        {
+            get { return _pressure; }
+            set
+            {
+                _pressure = value;
+                Invoke("Pressure");
+            }
+        }
+        public string Humidity
+        {
+            get { return _humidity; }
+            set
+            {
+                _humidity = value;
+                Invoke("Humidity");
+            }
+        }
+        public string FeelsLike
+        {
+            get { return _feelsLike; }
+            set
+            {
+                _feelsLike = value;
+                Invoke("FeelsLike");
+            }
+        }
         public string City
         {
             get { return _city; }
@@ -48,7 +101,12 @@ namespace WeatherDesktop.ViewModels
                         weatherHandler = new WeatherHandler();
                         _weather = weatherHandler.GetActualWeather(MainWindow.enteredCity);
                         Temperature = _weather.Main.Temp.ToString();
+                        FeelsLike = _weather.Main.Feels_Like.ToString();
                         City = _weather.Name;
+                        Pressure = _weather.Main.Pressure.ToString();
+                        Humidity = _weather.Main.Humidity.ToString();
+                        SpeedOfWind = _weather.Wind.Speed.ToString();
+                        ImagePath = GetImagePath.GetPath(_weather.Weather[0].Main);
                         Invoke("ButtonClick");
 
                         SavingsHandler.UpdateSettings(_weather);
