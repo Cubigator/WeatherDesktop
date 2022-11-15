@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Net;
@@ -7,12 +8,15 @@ namespace WeatherDesktop
 {
     internal class WeatherHandler
     {
-        private string _token = "b4501ae65c6d19177e5600027f7ec06a";
-        private string _lat = "55.0282171";  //Новосибирские координаты (по умолчанию)
-        private string _lon = "82.9234509";  //Новосибирские координаты (по умолчанию)
+        private string _token;
+        private string _lat;
+        private string _lon;
         public WeatherHandler()
         {
-           
+            FileStream stream = new FileStream(Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName + "\\sys.env", FileMode.Open);
+            StreamReader sr = new StreamReader(stream);
+            _token = sr.ReadToEnd();
+
         }
         private void UpdateCoords(string cityName)
         {
